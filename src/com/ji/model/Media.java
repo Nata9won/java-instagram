@@ -23,7 +23,7 @@ public class Media
     private String createdTime;
     private String link;
     private Likes likes;
-    private Images images;
+    private Image image;
     private Caption caption;
     private boolean userHasLiked;
     private String id;
@@ -119,14 +119,14 @@ public class Media
         this.likes = likes;
     }
 
-    public Images getImages()
+    public Image getImage()
     {
-        return images;
+        return image;
     }
 
-    public void setImages(Images images)
+    public void setImage(Image image)
     {
-        this.images = images;
+        this.image = image;
     }
 
     public Caption getCaption()
@@ -173,7 +173,7 @@ public class Media
     public String toString()
     {
         return "Media [attribution=" + attribution + ", tags=" + tags + ", type=" + type + ", location=" + location + ", comments=" + comments
-                + ", filter=" + filter + ", createdTime=" + createdTime + ", link=" + link + ", likes=" + likes + ", images=" + images + ", caption="
+                + ", filter=" + filter + ", createdTime=" + createdTime + ", link=" + link + ", likes=" + likes + ", image=" + image + ", caption="
                 + caption + ", userHasLiked=" + userHasLiked + ", id=" + id + ", user=" + user + "]";
     }
 
@@ -183,6 +183,13 @@ public class Media
         {
             setType(media.getString("type"));
             setLink(media.getString("link"));
+            //Get standard resolution
+            JSONObject imageData = new JSONObject(media.getString("images"));
+            imageData = new JSONObject(imageData.getString("standard_resolution"));
+            Image image_t = new Image();
+            image_t.setUrl(imageData.getString("url"));
+            setImage(image_t);
+            
         }
         catch (JSONException e)
         {
