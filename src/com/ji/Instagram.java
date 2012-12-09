@@ -120,7 +120,11 @@ public class Instagram implements UserAPI, RelationshipAPI, MediaAPI,
 			throw new InstagramException(e);
 		}
 	}
-
+	/**
+	 * Get the recent media published by a user.
+	 * 
+	 * @param userId
+	 */
 	public List<Media> getLastestRecentMedia(String userId)
 			throws InstagramException {
 		Utils.checkForNull(accessToken,
@@ -143,7 +147,12 @@ public class Instagram implements UserAPI, RelationshipAPI, MediaAPI,
 		}
 
 	}
-
+	/**
+	 * Get all medias published by a user.
+	 * now support only image
+	 * others require to update the deserialize part.
+	 * @param userId
+	 */
 	public List<Media> getAllMedia(String userId) throws InstagramException {
 		Utils.checkForNull(accessToken,
 				"This OAuth request requires an accessToken.");
